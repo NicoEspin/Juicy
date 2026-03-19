@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    },
+    "gsap": {
+      "source": "martinholovsky/claude-skills-generator",
+      "sourceType": "github",
+      "computedHash": "87a522a7a848de24c4ceafa591411d59636178f6b50cfc7f892688d8d0204660"
+    },
+    "nextjs-performance": {
+      "source": "giuseppe-trisciuoglio/developer-kit",
+      "sourceType": "github",
+      "computedHash": "e7aacb7a0f57077fd7494a5c3b633cbc6a351463142acb1101a7f85570e20ace"
+    },
+    "nextjs-seo": {
+      "source": "laguagu/claude-code-nextjs-skills",
+      "sourceType": "github",
+      "computedHash": "9a797ec9e41d4a2d8c46a6c7942616b6a010a66643a64995a303b55a108221d9"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "57f470f512f45bdac598e302bc72fd62bf2b649fc7fad032efe97720149cde4d"
+    },
+    "web-accessibility": {
+      "source": "supercent-io/skills-template",
+      "sourceType": "github",
+      "computedHash": "18f3c393f2fe364ecd7b0fbf646eafabef4dcb287af948e1414d16c84b4d7628"
+    }
+  }
+}

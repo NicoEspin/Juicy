@@ -1,0 +1,203 @@
+"use client";
+
+import { useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "gsap";
+import { initGsap, prefersReducedMotion } from "@/lib/gsap";
+
+interface HeroMotionProps {
+  targetId: string;
+}
+
+export function HeroMotion({ targetId }: HeroMotionProps) {
+  useEffect(() => {
+    initGsap();
+
+    const root = document.getElementById(targetId);
+    if (!root) return;
+
+    const reduceMotion = prefersReducedMotion();
+
+    const burger = root.querySelector<HTMLElement>("[data-hero-burger]");
+    const logo = root.querySelector<HTMLElement>("[data-hero-logo]");
+    const words = root.querySelectorAll<HTMLElement>("[data-hero-word]");
+    const ctas = root.querySelectorAll<HTMLElement>("[data-hero-cta]");
+    const tag = root.querySelector<HTMLElement>("[data-hero-tag]");
+    const eyebrow = root.querySelector<HTMLElement>("[data-hero-eyebrow]");
+    const accent = root.querySelector<HTMLElement>("[data-hero-accent]");
+    const body = root.querySelector<HTMLElement>("[data-hero-body]");
+    const badges = root.querySelector<HTMLElement>("[data-hero-badges]");
+    const cards = root.querySelectorAll<HTMLElement>("[data-hero-card]");
+    const marqueeTrack = root.querySelector<HTMLElement>("[data-hero-marquee]");
+
+    let marqueeTween: gsap.core.Tween | null = null;
+    let marqueeResizeRaf = 0;
+
+    const startHeroMarqueeLoop = () => {
+      if (!marqueeTrack || reduceMotion) {
+        return;
+      }
+
+      marqueeTween?.kill();
+      marqueeTrack.removeAttribute("data-no-js");
+
+      const singleSetWidth = marqueeTrack.scrollWidth / 2;
+      if (!singleSetWidth || !Number.isFinite(singleSetWidth)) {
+        return;
+      }
+
+      gsap.set(marqueeTrack, { x: 0, force3D: true });
+
+      const speedPxPerSecond = 110;
+      const duration = singleSetWidth / speedPxPerSecond;
+
+      marqueeTween = gsap.to(marqueeTrack, {
+        x: -singleSetWidth,
+        duration,
+        ease: "none",
+        repeat: -1,
+      });
+    };
+
+    const context = gsap.context(() => {
+      if (reduceMotion) {
+        gsap.set(
+          [
+            burger,
+            logo,
+            tag,
+            eyebrow,
+            accent,
+            body,
+            badges,
+            ...Array.from(words),
+            ...Array.from(ctas),
+            ...Array.from(cards),
+          ].filter(Boolean),
+          { clearProps: "all", opacity: 1 },
+        );
+        return;
+      }
+
+      if (!burger || !logo || !tag || words.length === 0 || ctas.length === 0)
+        return;
+
+      // ─── Entrance timeline ─────────────────────────────────────
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+      tl
+        // 1. Burger drops in
+        .fromTo(
+          burger,
+          { opacity: 0, scale: 0.82, y: 60 },
+          { opacity: 1, scale: 1, y: 0, duration: 1.15 },
+        )
+        // 2. Logo slides in from left
+        .from(logo, { opacity: 0, x: -72, duration: 0.75 }, "-=0.9")
+        // 3. Eyebrow fades up
+        .from(eyebrow, { opacity: 0, y: 16, duration: 0.45 }, "-=0.55")
+        // 4. Headline words clip up
+        .from(
+          words,
+          {
+            opacity: 0,
+            yPercent: 108,
+            stagger: 0.1,
+            duration: 0.7,
+            ease: "expo.out",
+          },
+          "-=0.38",
+        )
+        // 5. Accent + body
+        .from(
+          [accent, body].filter(Boolean),
+          { opacity: 0, y: 20, stagger: 0.1, duration: 0.5 },
+          "-=0.4",
+        )
+        // 6. CTAs
+        .from(
+          ctas,
+          { opacity: 0, y: 18, stagger: 0.08, duration: 0.42 },
+          "-=0.28",
+        )
+        // 7. Badges
+        .from(badges, { opacity: 0, y: 10, duration: 0.35 }, "-=0.22")
+        // 8. Rotating tag pops in
+        .fromTo(
+          tag,
+          { opacity: 0, rotation: 22, scale: 0.78, x: 28 },
+          {
+            opacity: 1,
+            rotation: -8,
+            scale: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "back.out(2.2)",
+          },
+          "-=0.45",
+        )
+        // 9. Stat cards float in
+        .from(
+          cards,
+          {
+            opacity: 0,
+            scale: 0.85,
+            y: 14,
+            stagger: 0.12,
+            duration: 0.45,
+            ease: "back.out(1.8)",
+          },
+          "-=0.38",
+        );
+
+      // ─── Parallax on scroll ─────────────────────────────────────
+      gsap.to(burger, {
+        y: 40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: root,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+
+      // Subtle card float loop
+      gsap.to(cards, {
+        y: -8,
+        duration: 2.4,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        stagger: { each: 0.6, from: "random" },
+      });
+    }, root);
+
+    const handleResize = () => {
+      cancelAnimationFrame(marqueeResizeRaf);
+      marqueeResizeRaf = window.requestAnimationFrame(startHeroMarqueeLoop);
+    };
+
+    if (marqueeTrack) {
+      if (reduceMotion) {
+        marqueeTrack.removeAttribute("data-no-js");
+        gsap.set(marqueeTrack, { x: 0 });
+      } else {
+        startHeroMarqueeLoop();
+        window.addEventListener("resize", handleResize);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(marqueeResizeRaf);
+      marqueeTween?.kill();
+      context.revert();
+      ScrollTrigger.getAll().forEach((t) => {
+        if (t.trigger === root) t.kill();
+      });
+    };
+  }, [targetId]);
+
+  return null;
+}

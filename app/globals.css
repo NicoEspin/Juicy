@@ -1,26 +1,507 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --juicy-red: #c41e1e;
+  --juicy-red-dark: #8b1010;
+  --juicy-red-light: #e84040;
+  --juicy-cream: #faf7f0;
+  --juicy-cream-dark: #f0ebe0;
+  --juicy-black: #1a1008;
+  --juicy-gray: #8a8070;
+  --juicy-white: #ffffff;
+  --checker-size: 18px;
+  --shadow-burger: 0 34px 80px rgba(26, 16, 8, 0.22);
+  --shadow-card: 0 24px 50px rgba(26, 16, 8, 0.1);
+  --radius-panel: 32px;
+  --page-max: 1380px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--juicy-cream);
+  --color-foreground: var(--juicy-black);
+  --color-juicy-red: var(--juicy-red);
+  --color-juicy-red-dark: var(--juicy-red-dark);
+  --color-juicy-red-light: var(--juicy-red-light);
+  --color-juicy-cream: var(--juicy-cream);
+  --color-juicy-cream-dark: var(--juicy-cream-dark);
+  --color-juicy-black: var(--juicy-black);
+  --color-juicy-gray: var(--juicy-gray);
+  --color-juicy-white: var(--juicy-white);
+  --font-display: var(--font-display-script);
+  --font-headline: var(--font-headline);
+  --font-body: var(--font-body);
+  --font-accent: var(--font-accent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(232, 64, 64, 0.1), transparent 30%),
+    linear-gradient(180deg, #fcfaf5 0%, var(--juicy-cream) 40%, #f7f0e4 100%);
+  color: var(--juicy-black);
+  font-family: var(--font-body), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  display: block;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+::selection {
+  background: rgba(196, 30, 30, 0.16);
+  color: var(--juicy-black);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(196, 30, 30, 0.8);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  border-radius: 999px;
+  background: var(--juicy-black);
+  color: var(--juicy-white);
+  padding: 0.75rem 1rem;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.grain-surface {
+  position: relative;
+  isolation: isolate;
+}
+
+.grain-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(26, 16, 8, 0.2) 0 0.8px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(26, 16, 8, 0.14) 0 0.8px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 30% 70%,
+      rgba(26, 16, 8, 0.16) 0 1px,
+      transparent 1.2px
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(26, 16, 8, 0.12) 0 0.8px,
+      transparent 1px
+    );
+  background-size: 140px 140px;
+}
+
+.checker-strip {
+  height: 18px;
+  width: 100%;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.72),
+      rgba(255, 255, 255, 0.72)
+    ),
+    conic-gradient(
+      from 90deg,
+      var(--juicy-red) 0deg 90deg,
+      var(--juicy-white) 90deg 180deg,
+      var(--juicy-red) 180deg 270deg,
+      var(--juicy-white) 270deg 360deg
+    );
+  background-size:
+    100% 100%,
+    var(--checker-size) var(--checker-size);
+  border-top: 1px solid rgba(26, 16, 8, 0.08);
+  border-bottom: 1px solid rgba(26, 16, 8, 0.08);
+}
+
+.section-shell {
+  margin-inline: auto;
+  width: min(calc(100% - 2rem), var(--page-max));
+}
+
+.editorial-panel {
+  position: relative;
+  overflow: clip;
+  border: 1px solid rgba(26, 16, 8, 0.08);
+  border-radius: var(--radius-panel);
+  background: rgba(255, 255, 255, 0.52);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(10px);
+}
+
+.paper-panel {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.45),
+      rgba(255, 255, 255, 0.15)
+    ),
+    linear-gradient(135deg, rgba(196, 30, 30, 0.04), transparent 45%),
+    var(--juicy-cream-dark);
+}
+
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 16, 8, 0.08);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 0.9rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--juicy-red-light), var(--juicy-red));
+  color: var(--juicy-white);
+  padding: 0.95rem 1.45rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 16px 30px rgba(196, 30, 30, 0.24);
+}
+
+.cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 34px rgba(196, 30, 30, 0.3);
+}
+
+.cta-inverse {
+  background: var(--juicy-white);
+  color: var(--juicy-red);
+  box-shadow: 0 18px 30px rgba(26, 16, 8, 0.18);
+}
+
+.cta-inverse:hover {
+  box-shadow: 0 22px 38px rgba(26, 16, 8, 0.22);
+}
+
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-bottom: 1px solid rgba(26, 16, 8, 0.2);
+  padding-bottom: 0.25rem;
+  font-weight: 700;
+}
+
+.headline-shadow {
+  text-shadow: 0 10px 24px rgba(26, 16, 8, 0.08);
+}
+
+.text-wrap-balance {
+  text-wrap: balance;
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+.section-divider-diagonal {
+  position: relative;
+}
+
+.section-divider-diagonal::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(196, 30, 30, 0.45),
+    transparent
+  );
+}
+
+.marquee-fade {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+.vibe-card-surface {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.92),
+      rgba(255, 255, 255, 0.76)
+    ),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 60%);
+  box-shadow: 0 22px 46px rgba(26, 16, 8, 0.18);
+}
+
+.red-panel-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* ════════════════════════════════════════════════════════════
+   MENU SHOWCASE — ADDITIONS TO globals.css
+   Argentine identity layer ✦ Juicy Carlos Paz
+════════════════════════════════════════════════════════════ */
+
+/* ── Carlos Paz origin stamp ── */
+.menu-origin-stamp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(196, 30, 30, 0.4);
+  background: rgba(196, 30, 30, 0.06);
+  padding: 0.25rem;
+  text-align: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.menu-origin-stamp:hover {
+  border-color: rgba(196, 30, 30, 0.7);
+  background: rgba(196, 30, 30, 0.1);
+}
+
+/* ── Local quote block ── */
+.menu-quote-block {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.menu-quote-block::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -0.5rem;
+  font-family: var(--font-headline);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: rgba(196, 30, 30, 0.2);
+  pointer-events: none;
+}
+
+/* ── Stat chips ── */
+.menu-stat-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: flex-start;
+  border: 1px solid rgba(26, 16, 8, 0.08);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.65rem 0.75rem;
+  backdrop-filter: blur(6px);
+}
+
+/* ── Ingredient pills ── */
+.menu-ingredient-chip {
+  display: inline-block;
+  border-radius: 999px;
+  border: 1px solid rgba(196, 30, 30, 0.18);
+  background: rgba(196, 30, 30, 0.04);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(26, 16, 8, 0.6);
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.menu-ingredient-chip:hover {
+  background: rgba(196, 30, 30, 0.1);
+  color: var(--juicy-red);
+}
+
+/* ── Quality tag — diagonal corner ribbon ── */
+.menu-quality-tag {
+  position: absolute;
+  right: -1.2rem;
+  top: 2.2rem;
+  z-index: 20;
+  background: var(--juicy-red);
+  color: white;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.3rem 2rem;
+  transform: rotate(35deg);
+  box-shadow: 0 4px 12px rgba(196, 30, 30, 0.35);
+  pointer-events: none;
+}
+
+/* ── Testimonial pill (red panel) ── */
+.menu-testimonial-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 0.9rem 0.5rem 0.5rem;
+  backdrop-filter: blur(8px);
+}
+
+/* ── Marquee animation ── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* GSAP handles this, but fallback if JS fails */
+@media (prefers-reduced-motion: no-preference) {
+  .menu-marquee-track[data-no-js] {
+    animation: marquee-scroll 26s linear infinite;
+  }
+}
+
+/* ── Card: updated card base ── */
+.menu-card {
+  border-radius: 1.5rem;
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+  will-change: transform;
+}
+
+.menu-card:hover {
+  box-shadow:
+    0 32px 64px rgba(18, 12, 6, 0.13),
+    0 8px 20px rgba(18, 12, 6, 0.07);
+}
+
+/* ── Price stamp ── */
+.menu-price-stamp {
+  background: var(--juicy-red, #c41e1e);
+  border-radius: 0.25rem;
+  padding: 0.55rem 0.85rem;
+  transform: rotate(2deg);
+  box-shadow: 3px 3px 0 rgba(18, 12, 6, 0.22);
+  transition: transform 0.22s ease;
+}
+
+.menu-card:hover .menu-price-stamp {
+  transform: rotate(-1.5deg) scale(1.05);
+}
+
+/* ── Bestseller badge ── */
+.menu-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  background: var(--juicy-red, #c41e1e);
+  text-align: center;
+  box-shadow:
+    0 16px 32px rgba(196, 30, 30, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  outline: 2.5px dashed rgba(255, 255, 255, 0.5);
+  outline-offset: 5px;
+}
+
+.menu-badge-inner {
+  display: block;
+  line-height: 1.1;
+}
+
+/* ── Red panel ── */
+.menu-red-panel {
+  background: linear-gradient(160deg, #e84040 0%, #c41e1e 48%, #8b1010 100%);
+  box-shadow: 0 36px 72px rgba(139, 16, 16, 0.35);
+}
+
+/* ── Watermark text ── */
+.menu-wm-text {
+  letter-spacing: -0.05em;
+}
+
+/* ── Panel CTA ── */
+.menu-panel-cta {
+  transition-duration: 220ms;
+  border-radius: 0.25rem;
 }
