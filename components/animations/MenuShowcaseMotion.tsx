@@ -111,7 +111,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
         stagger: 0.1,
         duration: 0.5,
         ease: "power2.out",
-        scrollTrigger: { trigger: root, start: "top 80%" },
+        scrollTrigger: { trigger: root, start: "top 80%", once: true },
       });
 
       // ─── Title lines — clip reveal (upward wipe) ─────────────────
@@ -120,7 +120,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
         duration: 0.85,
         ease: "power4.out",
         stagger: 0.12,
-        scrollTrigger: { trigger: root, start: "top 76%" },
+        scrollTrigger: { trigger: root, start: "top 76%", once: true },
       });
 
       // ─── Quote — fade + slight left shift ───────────────────────
@@ -130,7 +130,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
         duration: 0.65,
         ease: "power3.out",
         delay: 0.25,
-        scrollTrigger: { trigger: root, start: "top 74%" },
+        scrollTrigger: { trigger: root, start: "top 74%", once: true },
       });
 
       // ─── Copy block ──────────────────────────────────────────────
@@ -139,7 +139,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
         x: 30,
         duration: 0.6,
         ease: "power2.out",
-        scrollTrigger: { trigger: root, start: "top 74%" },
+        scrollTrigger: { trigger: root, start: "top 74%", once: true },
       });
 
       // ─── Stats — cascade up ──────────────────────────────────────
@@ -152,7 +152,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
           stagger: 0.08,
           duration: 0.5,
           ease: "back.out(1.8)",
-          scrollTrigger: { trigger: root, start: "top 72%" },
+          scrollTrigger: { trigger: root, start: "top 72%", once: true },
         });
       }
 
@@ -164,7 +164,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
         stagger: 0.15,
         duration: 0.85,
         ease: "power3.out",
-        scrollTrigger: { trigger: root, start: "top 70%" },
+        scrollTrigger: { trigger: root, start: "top 70%", once: true },
       });
 
       // ─── Badge — pop in with spring, then perpetual float ───────
@@ -175,7 +175,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
           rotation: -30,
           duration: 0.75,
           ease: "back.out(2.5)",
-          scrollTrigger: { trigger: root, start: "top 68%" },
+          scrollTrigger: { trigger: root, start: "top 68%", once: true },
         });
 
         // Slow perpetual rotation
@@ -204,7 +204,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
           scale: 0.97,
           duration: 0.8,
           ease: "power3.out",
-          scrollTrigger: { trigger: root, start: "top 66%" },
+          scrollTrigger: { trigger: root, start: "top 66%", once: true },
         });
       }
 
@@ -216,7 +216,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
           y: 20,
           duration: 0.6,
           ease: "power2.out",
-          scrollTrigger: { trigger: marquee, start: "top 90%" },
+          scrollTrigger: { trigger: marquee, start: "top 90%", once: true },
         });
 
         startMenuMarqueeLoop();

@@ -55,6 +55,7 @@ export function PhilosophyMotion({ targetId }: PhilosophyMotionProps) {
           scrollTrigger: {
             trigger: root,
             start: "top 78%",
+            once: true,
           },
         });
 
@@ -77,11 +78,12 @@ export function PhilosophyMotion({ targetId }: PhilosophyMotionProps) {
         stagger: { each: 0.02, from: "start" },
         duration: 0.55,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: root,
-          start: "top 75%",
-        },
-      });
+          scrollTrigger: {
+            trigger: root,
+            start: "top 75%",
+            once: true,
+          },
+        });
 
       // ─── Body copy ──────────────────────────────────────────────
       gsap.from(body, {
@@ -89,11 +91,12 @@ export function PhilosophyMotion({ targetId }: PhilosophyMotionProps) {
         x: 30,
         duration: 0.6,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: root,
-          start: "top 70%",
-        },
-      });
+          scrollTrigger: {
+            trigger: root,
+            start: "top 70%",
+            once: true,
+          },
+        });
 
       // ─── Pillars cascade with slight rotation ──────────────────
       gsap.from(pillars, {
@@ -103,19 +106,20 @@ export function PhilosophyMotion({ targetId }: PhilosophyMotionProps) {
         stagger: 0.1,
         duration: 0.65,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: root,
-          start: "top 65%",
-        },
-      });
+          scrollTrigger: {
+            trigger: root,
+            start: "top 65%",
+            once: true,
+          },
+        });
 
       // ─── Manifesto line reveal ──────────────────────────────────
       if (manifesto) {
         ScrollTrigger.create({
           trigger: manifesto,
           start: "top 88%",
+          once: true,
           onEnter: () => manifesto.classList.add("is-visible"),
-          onLeaveBack: () => manifesto.classList.remove("is-visible"),
         });
       }
 

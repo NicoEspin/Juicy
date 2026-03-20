@@ -11,7 +11,7 @@ export function initGsap() {
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.defaults({
     start: "top 80%",
-    toggleActions: "play none none reverse",
+    toggleActions: "play none none none",
   });
   registered = true;
 

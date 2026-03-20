@@ -415,7 +415,7 @@ export const locationsContent: LocationsContent = {
       badge: "Abierto",
       blurb: "Primer spot de Juicy. Alto flujo peatonal y salida rápida para takeaway.",
       mapPoint: { x: 45, y: 52 },
-      coordinates: { lat: -31.4228, lng: -64.5007 },
+      coordinates: { lat: -31.41416082448952, lng: -64.50336767408304 },
     },
     {
       id: "vcp-oeste",
@@ -430,7 +430,7 @@ export const locationsContent: LocationsContent = {
       badge: "Abierto",
       blurb: "Segunda base para cubrir noche y delivery en radio extendido.",
       mapPoint: { x: 62, y: 45 },
-      coordinates: { lat: -31.4371, lng: -64.4908 },
+      coordinates: { lat: -31.40356697273261, lng: -64.47059608942664 },
     },
     {
       id: "ba-launch",
