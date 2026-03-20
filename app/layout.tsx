@@ -4,9 +4,11 @@ import {
   Bebas_Neue,
   DM_Sans,
   Pacifico,
-  Playfair_Display,
-} from "next/font/google";
+  Playfair_Display, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const pacifico = Pacifico({
   variable: "--font-display-script",
@@ -89,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${pacifico.variable} ${bebasNeue.variable} ${dmSans.variable} ${playfairDisplay.variable}`}
+      className={cn(pacifico.variable, bebasNeue.variable, dmSans.variable, playfairDisplay.variable, "font-sans", geist.variable)}
     >
       <body>
         <a className="skip-link" href="#main-content">

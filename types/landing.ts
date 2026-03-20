@@ -124,6 +124,11 @@ export interface LocationPoint {
   y: number;
 }
 
+export interface GeoPoint {
+  lat: number;
+  lng: number;
+}
+
 export interface LocationItem {
   id: string;
   city: string;
@@ -136,6 +141,7 @@ export interface LocationItem {
   badge: string;
   blurb: string;
   mapPoint: LocationPoint;
+  coordinates?: GeoPoint;
   placeholderNote?: string;
 }
 
