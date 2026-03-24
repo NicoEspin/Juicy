@@ -409,6 +409,7 @@ export const locationsContent: LocationsContent = {
       address: "Bv. Sarmiento 551, Villa Carlos Paz",
       hours: "Lun a Dom · 12:00 a 00:00",
       phone: "+54 3541 000000",
+      whatsappHref: "https://wa.me/543541000000",
       mapsHref:
         "https://www.google.com/maps/search/?api=1&query=Bv.+Sarmiento+551,+Villa+Carlos+Paz",
       status: "open",
@@ -424,6 +425,7 @@ export const locationsContent: LocationsContent = {
       address: "San Martín 2249, Villa Carlos Paz",
       hours: "Lun a Dom · 18:00 a 01:00",
       phone: "+54 3541 000001",
+      whatsappHref: "https://wa.me/543541000001",
       mapsHref:
         "https://www.google.com/maps/search/?api=1&query=San+Martin+2249,+Villa+Carlos+Paz",
       status: "open",

@@ -136,6 +136,7 @@ export interface LocationItem {
   address: string;
   hours: string;
   phone: string;
+  whatsappHref?: string;
   mapsHref: string;
   status: LocationStatus;
   badge: string;
