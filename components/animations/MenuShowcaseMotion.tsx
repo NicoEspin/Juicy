@@ -156,11 +156,9 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
         });
       }
 
-      // ─── Cards — cascade with alternating tilt + distance ───────
+      // ─── Cards — cascade with vertical lift only ────────────────
       gsap.from(cards, {
-        opacity: 0,
         y: 70,
-        rotate: (i) => [3, -4, 2][i % 3],
         stagger: 0.15,
         duration: 0.85,
         ease: "power3.out",

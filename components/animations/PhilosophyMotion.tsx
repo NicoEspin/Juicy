@@ -20,6 +20,7 @@ export function PhilosophyMotion({ targetId }: PhilosophyMotionProps) {
 
     const context = gsap.context(() => {
       const dog = root.querySelector<HTMLElement>("[data-philosophy-dog]");
+      const dogImage = dog?.querySelector<HTMLElement>(".ph-dog-img");
       const chars = root.querySelectorAll<HTMLElement>(
         "[data-philosophy-char]",
       );
@@ -31,13 +32,9 @@ export function PhilosophyMotion({ targetId }: PhilosophyMotionProps) {
         "[data-philosophy-manifesto]",
       );
 
-      const targets = [
-        dog,
-        body,
-        manifesto,
-        ...Array.from(chars),
-        ...Array.from(pillars),
-      ].filter((el): el is HTMLElement => Boolean(el));
+      const targets = [dog, dogImage, body, manifesto, ...Array.from(chars), ...Array.from(pillars)].filter(
+        (el): el is HTMLElement => Boolean(el),
+      );
 
       if (reduceMotion) {
         gsap.set(targets, { clearProps: "all", opacity: 1, x: 0, y: 0 });
@@ -58,16 +55,67 @@ export function PhilosophyMotion({ targetId }: PhilosophyMotionProps) {
             once: true,
           },
         });
+      }
 
-        // Breathe + rock subtly forever
-        gsap.to(dog, {
-          y: -14,
-          rotation: 2.5,
-          duration: 2.8,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
+      if (dogImage) {
+        gsap.set(dogImage, {
+          force3D: true,
+          transformOrigin: "50% 85%",
         });
+
+        gsap.timeline({
+          defaults: {
+            ease: "sine.inOut",
+          },
+          repeat: -1,
+        })
+          .to(dogImage, {
+            y: -10,
+            rotation: 1.8,
+            duration: 2.2,
+          })
+          .to(dogImage, {
+            y: -16,
+            rotation: -1.1,
+            duration: 2,
+          })
+          .to(dogImage, {
+            y: -7,
+            rotation: 0.7,
+            duration: 2,
+          })
+          .to(dogImage, {
+            y: 0,
+            rotation: 0,
+            duration: 2.4,
+          });
+      } else if (dog) {
+        gsap.timeline({
+          defaults: {
+            ease: "sine.inOut",
+          },
+          repeat: -1,
+        })
+          .to(dog, {
+            y: -10,
+            rotation: 1.8,
+            duration: 2.2,
+          })
+          .to(dog, {
+            y: -16,
+            rotation: -1.1,
+            duration: 2,
+          })
+          .to(dog, {
+            y: -7,
+            rotation: 0.7,
+            duration: 2,
+          })
+          .to(dog, {
+            y: 0,
+            rotation: 0,
+            duration: 2.4,
+          });
       }
 
       // ─── Headline chars stagger ─────────────────────────────────

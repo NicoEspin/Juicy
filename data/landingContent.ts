@@ -316,73 +316,110 @@ const instagramPlaceholderItems: InstagramPlaceholderItem[] = [
 export const socialProofContent: SocialProofContent = {
   kicker: "Lo que dicen",
   eyebrow: "Social proof",
-  title: "La gente habla y nosotros escuchamos.",
+  title: "Carlos Paz ya tiene sus favoritas.",
   description:
-    "Esta sección está lista para reviews reales de Google e Instagram. Mientras tanto, usamos contenido editorial seguro para sostener credibilidad sin inventar métricas falsas.",
+    "Resenas reales de clientes que destacan producto, rapidez, precio y atencion. Prueba social concreta para reforzar deseo y visita sin romper la estetica editorial.",
   reviews: [
     {
       id: "review-1",
-      author: "Martina R.",
-      source: "Google",
-      sourceHandle: "Reseña verificada",
+      author: "Juan Marcos Bertiche",
       rating: 5,
-      date: "Hace 2 semanas",
-      quote:
-        "El pan llega impecable, la carne con costra real y el sabor no se cae en ningún bocado.",
-      note: "Placeholder basado en tono esperado de reviews reales.",
+      quote: "Muy buena hamburguesa; las papas son un espectaculo.",
     },
     {
       id: "review-2",
-      author: "Lucas G.",
-      source: "Instagram",
-      sourceHandle: "@lucascome",
+      author: "Gaston Gomez",
       rating: 5,
-      date: "Hace 6 días",
       quote:
-        "Fui por recomendación y terminé volviendo a la semana. Tiene identidad, no copia a nadie.",
-      note: "Reemplazar por testimonial real cuando cliente lo comparta.",
+        "Muy buena onda los pibes, hamburguesas riquisimas y super llenadoras.",
     },
     {
       id: "review-3",
-      author: "Valen C.",
-      source: "Google",
-      sourceHandle: "Local guide",
+      author: "Sevilla Maria Paz",
       rating: 5,
-      date: "Hace 1 mes",
-      quote:
-        "La atención va al mismo ritmo que la cocina. Todo sale prolijo y con hambre de volver.",
-      note: "Placeholder curado para mantener narrativa de marca.",
+      quote: "Muchas variedades, combinaciones originales y un sabor unico.",
     },
     {
       id: "review-4",
-      author: "Santi M.",
-      source: "Instagram",
-      sourceHandle: "@santimvcp",
-      rating: 4,
-      date: "Hace 10 días",
+      author: "nadia gonzalez",
+      rating: 5,
       quote:
-        "Gran spot para noche en Carlos Paz. Pedís una vez y ya sabés qué volver a pedir.",
-      note: "Pendiente de review real de cliente para reemplazo final.",
+        "Llegue por TikTok estando de paso por Villa Carlos Paz y estuvo todo increible: atencion, hamburguesas, papas y hasta las salsas para probar.",
+    },
+    {
+      id: "review-5",
+      author: "Abril Silveira",
+      rating: 5,
+      quote:
+        "Fuimos en familia, pedimos 6 hamburguesas triples y las tuvieron super rapido. Son riquisimas y el precio lo vale totalmente.",
+    },
+    {
+      id: "review-6",
+      author: "IRBenja",
+      rating: 4,
+      quote:
+        "Lugar lindo, hamburguesas ricas y buen precio. Si estas antojado de una burger, viene muy bien; hay variedad, promos atractivas y lo recomiendo.",
+    },
+    {
+      id: "review-7",
+      author: "franco Purita",
+      rating: 5,
+      quote:
+        "Hamburguesas muy ricas, atencion de 10 y papas con un condimento especial que no te deja parar. Salsitas muy buenas y precio super accesible.",
+    },
+    {
+      id: "review-8",
+      author: "Francina Aguero",
+      rating: 5,
+      quote:
+        "Compre de noche y salio super rapido. Hasta llegando fria por mi demora, la hamburguesa seguia super rica. Las papas me encantaron.",
+    },
+    {
+      id: "review-9",
+      author: "Maxi Gimenez",
+      rating: 5,
+      quote: "Las mejores hamburguesas de Carlos Paz. Un 100/10 y la atencion un 1000.",
+    },
+    {
+      id: "review-10",
+      author: "Emi Diaz",
+      rating: 5,
+      quote:
+        "Volvi a ir y sigue todo con gran calidad. Encima el pan ahora le ponen manteca. Muy buenoo.",
+    },
+    {
+      id: "review-11",
+      author: "Agus Caceres",
+      rating: 5,
+      quote:
+        "Las mejores de Carlos Paz, super economicas y las papas con sazon son un 10.",
+    },
+    {
+      id: "review-12",
+      author: "molly brou",
+      rating: 5,
+      quote:
+        "Pedimos una promo de hamburguesa doble: estaba riquisima, de muy buena calidad, y las papitas tienen un saborizante muy rico tambien.",
     },
   ],
   trustMetrics: [
     {
-      id: "metric-google",
-      label: "Google rating",
-      value: "4.8",
-      helper: "Placeholder hasta conexión con puntaje real.",
-    },
-    {
-      id: "metric-served",
-      label: "Burgers servidas",
-      value: "10k+",
-      helper: "Reemplazar por cifra validada por operación.",
-    },
-    {
       id: "metric-locations",
-      label: "Sucursales VCP",
+      label: "Sucursales activas",
       value: "2",
-      helper: "Valor real actual.",
+      helper: "Dos puntos encendidos hoy en Villa Carlos Paz.",
+    },
+    {
+      id: "metric-delivery",
+      label: "Canal fuerte",
+      value: "Delivery",
+      helper: "Takeaway y pedidos ya forman parte del habito Juicy.",
+    },
+    {
+      id: "metric-ba",
+      label: "Proxima parada",
+      value: "BA",
+      helper: "La waitlist ya prepara el aterrizaje en Buenos Aires.",
     },
   ],
   instagramTitle: "Instagram wall",
@@ -405,7 +442,7 @@ export const locationsContent: LocationsContent = {
     {
       id: "vcp-centro",
       city: "Villa Carlos Paz",
-      zone: "Centro",
+      zone: "Sarmiento",
       address: "Bv. Sarmiento 551, Villa Carlos Paz",
       hours: "Lun a Dom · 12:00 a 00:00",
       phone: "+54 3541 000000",
@@ -414,7 +451,7 @@ export const locationsContent: LocationsContent = {
         "https://www.google.com/maps/search/?api=1&query=Bv.+Sarmiento+551,+Villa+Carlos+Paz",
       status: "open",
       badge: "Abierto",
-      blurb: "Primer spot de Juicy. Alto flujo peatonal y salida rápida para takeaway.",
+      blurb: "Primer spot de Juicy. Alto flujo y salida rápida para takeaway.",
       mapPoint: { x: 45, y: 52 },
       coordinates: { lat: -31.41416082448952, lng: -64.50336767408304 },
     },
@@ -430,7 +467,7 @@ export const locationsContent: LocationsContent = {
         "https://www.google.com/maps/search/?api=1&query=San+Martin+2249,+Villa+Carlos+Paz",
       status: "open",
       badge: "Abierto",
-      blurb: "Segunda base para cubrir noche y delivery en radio extendido.",
+      blurb: "Segunda spot para consumir en el local o takeaway.",
       mapPoint: { x: 62, y: 45 },
       coordinates: { lat: -31.40356697273261, lng: -64.47059608942664 },
     },
@@ -482,7 +519,7 @@ export const footerContent: FooterContent = {
   locations: [
     {
       id: "footer-vcp-centro",
-      name: "VCP Centro",
+      name: "VCP Sarmiento",
       address: "Dirección final pendiente de validación",
       hours: "Lun a Dom · 12:00 a 00:00",
       note: "Placeholder de dirección hasta confirmación oficial.",

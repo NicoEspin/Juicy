@@ -173,10 +173,7 @@ export interface LocationsContent {
 export interface ReviewItem {
   id: string;
   author: string;
-  source: string;
-  sourceHandle: string;
   rating: number;
-  date: string;
   quote: string;
   note?: string;
 }

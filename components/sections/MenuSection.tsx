@@ -137,7 +137,7 @@ export function MenuSection() {
           {/* ── COMPACT ── */}
           <MenuBurgerCard
             className="lg:col-span-4 min-h-[22rem] lg:min-h-[24.5rem]"
-            imageClassName="scale-[0.9] rotate-[4deg]"
+            imageClassName="scale-[0.9]"
             item={compact}
             variant="compact"
           />
@@ -167,7 +167,7 @@ export function MenuSection() {
           {/* ── CLOSING ── */}
           <MenuBurgerCard
             className="lg:col-span-4 min-h-[22rem] lg:min-h-[24.5rem]"
-            imageClassName="rotate-[-3deg]"
+            imageClassName=""
             item={closing}
             variant="compact"
           />
