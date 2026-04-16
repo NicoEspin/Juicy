@@ -205,7 +205,7 @@ export function MenuSection() {
 
             <div className="relative flex flex-col gap-5 p-6 pt-10 lg:flex-row lg:items-start lg:justify-between lg:gap-8 lg:p-6 lg:pt-9 xl:gap-10">
               {/* Top */}
-              <div className="space-y-5 lg:max-w-[40rem]">
+              <div className="space-y-5 lg:max-w-[40rem]" data-menu-panel-copy>
                 <p className="section-kicker border-white/20 bg-white/10 text-white/90">
                   🇦🇷 Desde 2019
                 </p>
@@ -245,7 +245,7 @@ export function MenuSection() {
               </div>
 
               {/* Bottom CTA */}
-              <div className="space-y-3 lg:w-[20rem] lg:shrink-0">
+              <div className="space-y-3 lg:w-[20rem] lg:shrink-0" data-menu-panel-actions>
                 <a
                   className="menu-panel-cta group inline-flex w-full items-center justify-between gap-3 border-2 border-white/30 bg-white/10 px-5 py-4 text-sm font-bold uppercase tracking-[0.1em] text-white backdrop-blur-sm transition-all hover:bg-white hover:text-juicy-red"
                   href={menuShowcaseContent.cta.href}

@@ -17,6 +17,7 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
     if (!root) return;
 
     const reduceMotion = prefersReducedMotion();
+    const isMobile = window.matchMedia("(max-width: 1023.98px)").matches;
 
     // ─── Element refs ──────────────────────────────────────────────
     const kicker = root.querySelector<HTMLElement>("[data-menu-kicker]");
@@ -30,6 +31,8 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
     const cards = root.querySelectorAll<HTMLElement>("[data-menu-card]");
     const badge = root.querySelector<HTMLElement>("[data-menu-badge]");
     const panel = root.querySelector<HTMLElement>("[data-menu-panel]");
+    const panelCopy = root.querySelector<HTMLElement>("[data-menu-panel-copy]");
+    const panelActions = root.querySelector<HTMLElement>("[data-menu-panel-actions]");
     const wm = root.querySelector<HTMLElement>("[data-menu-wm]");
     const marquee = root.querySelector<HTMLElement>("[data-menu-marquee]");
     const marqueeTrack = root.querySelector<HTMLElement>(".menu-marquee-track");
@@ -75,6 +78,8 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
           stats,
           badge,
           panel,
+          panelCopy,
+          panelActions,
           marquee,
           ...Array.from(cards),
           ...Array.from(titleLines),
@@ -158,14 +163,16 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
 
       // ─── Cards — cascade with vertical lift only ────────────────
       gsap.from(cards, {
-        y: 70,
-        stagger: 0.15,
-        duration: 0.85,
-        ease: "power3.out",
+        opacity: 0,
+        y: isMobile ? 40 : 70,
+        scale: isMobile ? 0.96 : 1,
+        stagger: isMobile ? 0.1 : 0.15,
+        duration: isMobile ? 0.7 : 0.85,
+        ease: isMobile ? "power2.out" : "power3.out",
         scrollTrigger: { trigger: root, start: "top 70%", once: true },
       });
 
-      // ─── Badge — pop in with spring, then perpetual float ───────
+      // ─── Badge — pop in with spring, then subtle loop ────────────
       if (badge) {
         gsap.from(badge, {
           opacity: 0,
@@ -176,18 +183,10 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
           scrollTrigger: { trigger: root, start: "top 68%", once: true },
         });
 
-        // Slow perpetual rotation
         gsap.to(badge, {
-          rotation: 360,
-          duration: 14,
-          ease: "none",
-          repeat: -1,
-        });
-
-        // Gentle float
-        gsap.to(badge, {
-          y: -6,
-          duration: 2.2,
+          y: -5,
+          rotation: isMobile ? 3 : 6,
+          duration: isMobile ? 2.8 : 3.2,
           ease: "sine.inOut",
           yoyo: true,
           repeat: -1,
@@ -198,11 +197,21 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
       if (panel) {
         gsap.from(panel, {
           opacity: 0,
-          x: 50,
-          scale: 0.97,
-          duration: 0.8,
-          ease: "power3.out",
+          x: isMobile ? 0 : 50,
+          y: isMobile ? 28 : 0,
+          scale: isMobile ? 0.98 : 0.97,
+          duration: isMobile ? 0.72 : 0.8,
+          ease: isMobile ? "power2.out" : "power3.out",
           scrollTrigger: { trigger: root, start: "top 66%", once: true },
+        });
+
+        gsap.from([panelCopy, panelActions].filter(Boolean), {
+          opacity: 0,
+          y: 18,
+          stagger: 0.1,
+          duration: 0.46,
+          ease: "power2.out",
+          scrollTrigger: { trigger: panel, start: "top 82%", once: true },
         });
       }
 
@@ -221,61 +230,63 @@ export function MenuShowcaseMotion({ targetId }: MenuShowcaseMotionProps) {
       }
 
       // ─── Card hover: image lift + tilt ──────────────────────────
-      cards.forEach((card) => {
-        const image = card.querySelector<HTMLElement>("[data-menu-image]");
-        if (!image) return;
+      if (!isMobile) {
+        cards.forEach((card) => {
+          const image = card.querySelector<HTMLElement>("[data-menu-image]");
+          if (!image) return;
 
-        const enter = () => {
-          gsap.to(image, {
-            scale: 1.07,
-            rotation: 2.5,
-            y: -14,
-            filter: "drop-shadow(0 36px 56px rgba(18,12,6,0.24))",
-            duration: 0.4,
-            ease: "power2.out",
-            overwrite: true,
-          });
-          gsap.to(card, {
-            y: -5,
-            duration: 0.32,
-            ease: "power2.out",
-            overwrite: true,
-          });
-        };
+          const enter = () => {
+            gsap.to(image, {
+              scale: 1.07,
+              rotation: 2.5,
+              y: -14,
+              filter: "drop-shadow(0 36px 56px rgba(18,12,6,0.24))",
+              duration: 0.4,
+              ease: "power2.out",
+              overwrite: true,
+            });
+            gsap.to(card, {
+              y: -5,
+              duration: 0.32,
+              ease: "power2.out",
+              overwrite: true,
+            });
+          };
 
-        const leave = () => {
-          gsap.to(image, {
-            scale: 1,
-            rotation: 0,
-            y: 0,
-            filter: "drop-shadow(0 0px 0px transparent)",
-            duration: 0.48,
-            ease: "power2.inOut",
-            overwrite: true,
-          });
-          gsap.to(card, {
-            y: 0,
-            duration: 0.4,
-            ease: "power2.inOut",
-            overwrite: true,
-          });
-        };
+          const leave = () => {
+            gsap.to(image, {
+              scale: 1,
+              rotation: 0,
+              y: 0,
+              filter: "drop-shadow(0 0px 0px transparent)",
+              duration: 0.48,
+              ease: "power2.inOut",
+              overwrite: true,
+            });
+            gsap.to(card, {
+              y: 0,
+              duration: 0.4,
+              ease: "power2.inOut",
+              overwrite: true,
+            });
+          };
 
-        card.addEventListener("mouseenter", enter);
-        card.addEventListener("mouseleave", leave);
-        card.addEventListener("focusin", enter);
-        card.addEventListener("focusout", leave);
+          card.addEventListener("mouseenter", enter);
+          card.addEventListener("mouseleave", leave);
+          card.addEventListener("focusin", enter);
+          card.addEventListener("focusout", leave);
 
-        cleanupFns.push(() => {
-          card.removeEventListener("mouseenter", enter);
-          card.removeEventListener("mouseleave", leave);
-          card.removeEventListener("focusin", enter);
-          card.removeEventListener("focusout", leave);
+          cleanupFns.push(() => {
+            card.removeEventListener("mouseenter", enter);
+            card.removeEventListener("mouseleave", leave);
+            card.removeEventListener("focusin", enter);
+            card.removeEventListener("focusout", leave);
+          });
         });
-      });
+      }
 
       // ─── Panel interactive tilt on mouse move ────────────────────
-      if (panel) {
+      if (panel && !isMobile) {
         const onMove = (e: MouseEvent) => {
           const rect = panel.getBoundingClientRect();
           const cx = rect.left + rect.width / 2;

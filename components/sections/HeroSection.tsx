@@ -151,12 +151,16 @@ export function HeroSection() {
 
           {/* ── RIGHT: Burger visual ── */}
           <div className="hero-visual">
-            <p aria-hidden="true" className="hero-mobile-title hero-mobile-title--top">
+            <p
+              aria-hidden="true"
+              className="hero-mobile-title hero-mobile-title--top"
+              data-hero-mobile-line
+            >
               {heroContent.titleTop}
             </p>
 
             {/* Red arc blob */}
-            <div aria-hidden="true" className="hero-blob" />
+            <div aria-hidden="true" className="hero-blob" data-hero-blob />
 
             {/* "Feelin' it" rotated tag */}
             <div data-hero-tag className="hero-tag">
@@ -181,6 +185,7 @@ export function HeroSection() {
             <p
               aria-hidden="true"
               className="hero-mobile-title hero-mobile-title--bottom"
+              data-hero-mobile-line
             >
               {heroContent.titleBottom}
             </p>
@@ -643,6 +648,7 @@ export function HeroSection() {
           line-height: 0.9;
           text-align: center;
           text-wrap: balance;
+          will-change: transform, opacity;
         }
 
           .hero-mobile-title--top {
@@ -664,6 +670,7 @@ export function HeroSection() {
           background: radial-gradient(circle, rgba(196,30,30,0.18) 0%, transparent 70%);
           filter: blur(40px);
           pointer-events: none;
+          will-change: transform, opacity;
         }
 
         /* Rotating "Feelin' it" tag */
@@ -765,6 +772,10 @@ export function HeroSection() {
         }
 
         @media (max-width: 1023.98px) {
+          .hero-stamp {
+            display: none;
+          }
+
           .hero-shell {
             padding-inline: clamp(1rem, 4vw, 1.35rem);
           }
@@ -845,6 +856,8 @@ export function HeroSection() {
           }
 
           .hero-copy {
+            width: 100%;
+            justify-self: stretch;
             gap: 0.95rem;
             max-width: 21.5rem;
             margin-top: -0.1rem;
@@ -887,6 +900,7 @@ export function HeroSection() {
           .hero-badges {
             max-width: 18.5rem;
             gap: 0.45rem;
+            margin-top: 0.45rem;
           }
 
           .hero-badge {
