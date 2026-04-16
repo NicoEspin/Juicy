@@ -18,6 +18,7 @@ export function HeroMotion({ targetId }: HeroMotionProps) {
 
     const reduceMotion = prefersReducedMotion();
 
+    const burgerWrap = root.querySelector<HTMLElement>("[data-hero-burger-wrap]");
     const burger = root.querySelector<HTMLElement>("[data-hero-burger]");
     const logo = root.querySelector<HTMLElement>("[data-hero-logo]");
     const words = root.querySelectorAll<HTMLElement>("[data-hero-word]");
@@ -63,6 +64,7 @@ export function HeroMotion({ targetId }: HeroMotionProps) {
       if (reduceMotion) {
         gsap.set(
           [
+            burgerWrap,
             burger,
             logo,
             tag,
@@ -151,16 +153,18 @@ export function HeroMotion({ targetId }: HeroMotionProps) {
         );
 
       // ─── Parallax on scroll ─────────────────────────────────────
-      gsap.to(burger, {
-        y: 40,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.2,
-        },
-      });
+      if (burgerWrap) {
+        gsap.to(burgerWrap, {
+          y: 40,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        });
+      }
 
       // Subtle card float loop
       gsap.to(cards, {
