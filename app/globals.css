@@ -13,6 +13,8 @@
   --juicy-black: #1a1008;
   --juicy-gray: #8a8070;
   --juicy-white: #ffffff;
+  /* Reserved for promotions/deals only — everything else stays on the red/black/cream/gray palette. */
+  --juicy-gold: #e0a62a;
   --checker-size: 18px;
   --shadow-burger: 0 34px 80px rgba(26, 16, 8, 0.22);
   --shadow-card: 0 24px 50px rgba(26, 16, 8, 0.1);
@@ -63,6 +65,7 @@
   --color-juicy-black: var(--juicy-black);
   --color-juicy-gray: var(--juicy-gray);
   --color-juicy-white: var(--juicy-white);
+  --color-juicy-gold: var(--juicy-gold);
   --font-display: var(--font-display-script);
   --font-headline: var(--font-headline);
   --font-body: var(--font-body);
@@ -632,6 +635,20 @@ select {
 
 .ordering-fade {
   animation: ordering-fade-in 180ms ease;
+}
+
+@keyframes ordering-progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.ordering-progress-fill {
+  animation: ordering-progress-fill linear forwards;
+  transform-origin: left;
 }
 
 .maplibregl-map {

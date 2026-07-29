@@ -28,6 +28,11 @@ export function ProductCard({ onOpenDetail, product }: ProductCardProps) {
             {product.badge}
           </span>
         )}
+        {product.promoLabel && (
+          <span className="absolute right-2.5 top-2.5 rounded-md bg-juicy-gold px-2 py-1 text-[0.6rem] font-extrabold uppercase tracking-[0.03em] text-juicy-black shadow-sm">
+            {product.promoLabel}
+          </span>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-3">
@@ -52,9 +57,20 @@ export function ProductCard({ onOpenDetail, product }: ProductCardProps) {
         >
           {product.variants.map((variant) => (
             <div key={variant.id} className="min-w-0 text-center">
-              <p className="truncate text-[0.68rem] font-extrabold text-juicy-red">
-                {compactMoney(variant.price)}
-              </p>
+              {variant.promoPrice ? (
+                <>
+                  <p className="truncate text-[0.5rem] font-semibold text-juicy-gray line-through">
+                    {compactMoney(variant.price)}
+                  </p>
+                  <p className="truncate text-[0.68rem] font-extrabold text-juicy-red">
+                    {compactMoney(variant.promoPrice)}
+                  </p>
+                </>
+              ) : (
+                <p className="truncate text-[0.68rem] font-extrabold text-juicy-red">
+                  {compactMoney(variant.price)}
+                </p>
+              )}
               <p className="truncate text-[0.52rem] font-bold uppercase tracking-[0.03em] text-juicy-gray">
                 {variant.name}
               </p>

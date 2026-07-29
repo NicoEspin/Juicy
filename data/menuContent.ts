@@ -56,11 +56,12 @@ export const PRODUCTS: Product[] = [
     imageAlt: "Caramel Burger — foto de producto",
     featured: true,
     badge: "LA MÁS PEDIDA",
+    promoLabel: "-10%",
     available: true,
     variants: [
-      { id: "simple", name: "SIMPLE", price: 13000, available: true },
-      { id: "doble", name: "DOBLE", price: 14000, available: true },
-      { id: "triple", name: "TRIPLE", price: 15000, available: true },
+      { id: "simple", name: "SIMPLE", price: 13000, promoPrice: 11700, available: true },
+      { id: "doble", name: "DOBLE", price: 14000, promoPrice: 12600, available: true },
+      { id: "triple", name: "TRIPLE", price: 15000, promoPrice: 13500, available: true },
     ],
     ingredients: [
       { id: "carne", name: "Carne", removable: false, includedByDefault: true },
@@ -158,8 +159,9 @@ export const PRODUCTS: Product[] = [
     description: "2 burgers a elección + papas cheddar bacon para compartir + 2 bebidas.",
     category: "combos",
     imageAlt: "Combo Dúo Juicy — foto de producto",
+    promoLabel: "-15%",
     available: true,
-    variants: [{ id: "unico", name: "COMBO", price: 32000, available: true }],
+    variants: [{ id: "unico", name: "COMBO", price: 32000, promoPrice: 27200, available: true }],
     ingredients: [
       { id: "burgers", name: "2 burgers simples a elección", removable: false, includedByDefault: true },
       { id: "papas", name: "Papas cheddar bacon grandes", removable: false, includedByDefault: true },
@@ -193,10 +195,11 @@ export const PRODUCTS: Product[] = [
     category: "papas",
     imageAlt: "Papas Cheddar Bacon — foto de producto",
     featured: true,
+    promoLabel: "-10%",
     available: true,
     variants: [
-      { id: "chica", name: "CHICA", price: 4800, available: true },
-      { id: "grande", name: "GRANDE", price: 6500, available: true },
+      { id: "chica", name: "CHICA", price: 4800, promoPrice: 4300, available: true },
+      { id: "grande", name: "GRANDE", price: 6500, promoPrice: 5800, available: true },
     ],
     ingredients: [
       { id: "papa", name: "Papa", removable: false, includedByDefault: true },

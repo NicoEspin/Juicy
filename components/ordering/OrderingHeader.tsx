@@ -1,18 +1,27 @@
+import Image from "next/image";
+import { forwardRef } from "react";
+import { landingAssets } from "@/data/landingContent";
+
 interface OrderingHeaderProps {
   branchLabel: string;
   onOpenBranchSheet: () => void;
   onProfileClick: () => void;
 }
 
-export function OrderingHeader({ branchLabel, onOpenBranchSheet, onProfileClick }: OrderingHeaderProps) {
+export const OrderingHeader = forwardRef<HTMLDivElement, OrderingHeaderProps>(function OrderingHeader(
+  { branchLabel, onOpenBranchSheet, onProfileClick },
+  ref,
+) {
   return (
-    <div className="sticky top-0 z-30 bg-juicy-cream">
+    <div ref={ref} className="sticky top-0 z-30 bg-juicy-cream">
       <div className="flex items-center justify-between gap-2.5 px-4 py-3.5 sm:px-6 lg:px-8">
-        <div className="shrink-0 -rotate-3 rounded-lg bg-juicy-red px-2.5 py-1.5 text-white shadow-[0_3px_0_rgba(26,16,8,0.25)]">
-          <p className="text-center font-body text-[9px] tracking-[0.12em] opacity-85">BURGERS</p>
-          <p className="text-center font-headline text-lg leading-none tracking-[0.01em]">Juicy</p>
-          <p className="mt-0.5 text-center text-[7px] tracking-[0.02em] opacity-80">Taste the difference</p>
-        </div>
+        <Image
+          alt="Juicy Hamburgers"
+          className="h-11 w-auto shrink-0"
+          priority
+          sizes="90px"
+          src={landingAssets.logo}
+        />
 
         <button
           aria-label="Elegir sucursal"
@@ -46,4 +55,4 @@ export function OrderingHeader({ branchLabel, onOpenBranchSheet, onProfileClick 
       <div className="checker-strip" />
     </div>
   );
-}
+});

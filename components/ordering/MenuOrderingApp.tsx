@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { BottomNav } from "@/components/ordering/BottomNav";
 import { BranchChangeDialog } from "@/components/ordering/BranchChangeDialog";
 import { BranchSheet } from "@/components/ordering/BranchSheet";
@@ -16,6 +16,7 @@ import { MenuCatalog } from "@/components/ordering/MenuCatalog";
 import { OrderingHeader } from "@/components/ordering/OrderingHeader";
 import { OrderSentScreen } from "@/components/ordering/OrderSentScreen";
 import { ProductDetailOverlay } from "@/components/ordering/ProductDetailOverlay";
+import { PromoBanner } from "@/components/ordering/PromoBanner";
 import { SearchBar } from "@/components/ordering/SearchBar";
 import { SearchResults } from "@/components/ordering/SearchResults";
 import { Toast } from "@/components/ordering/Toast";
@@ -40,6 +41,26 @@ export function MenuOrderingApp({ branch, branches, categories, products }: Menu
   const [searchQuery, setSearchQuery] = useState("");
   const [toastMessage, setToastMessage] = useState("");
   const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Measured live so the sticky category bar always docks right below the header,
+  // regardless of how tall the header ends up being (logo image, wrapping, etc.).
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    const node = headerRef.current;
+    if (!node) return;
+
+    // Measure synchronously right after mount so the first paint is already correct,
+    // then keep watching in case the header's height changes later (font load, wrap, etc).
+    setHeaderHeight(node.getBoundingClientRect().height);
+
+    const observer = new ResizeObserver((entries) => {
+      setHeaderHeight(entries[0].contentRect.height);
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const [editingItem, setEditingItem] = useState<CartItem | null>(null);
@@ -154,18 +175,33 @@ export function MenuOrderingApp({ branch, branches, categories, products }: Menu
   const cartTotalLabel = formatMoney(calculateSubtotal(cart.cart));
   const isFavorite = activeProduct ? favorites.favorites.includes(activeProduct.id) : false;
 
+  const categoriesWithPromo = new Set<ProductCategoryId>(
+    products
+      .filter((product) => product.promoLabel || product.variants.some((variant) => variant.promoPrice))
+      .map((product) => product.category),
+  );
+
   return (
     <div className="relative mx-auto min-h-screen w-full max-w-2xl bg-juicy-cream lg:max-w-5xl">
       <OrderingHeader
-        branchLabel={branch.zone}
+        ref={headerRef}
+        branchLabel={`${branch.city} · ${branch.zone}`}
         onOpenBranchSheet={() => setShowBranchSheet(true)}
         onProfileClick={() => showToast("Perfil — próximamente")}
       />
 
+      <PromoBanner promotions={branch.promotions} />
+
       <SearchBar onSearchChange={setSearchQuery} searchQuery={searchQuery} />
 
       {!isSearching && (
-        <CategoryTabs activeCategory={activeCategory} categories={categories} onSelect={selectCategory} />
+        <CategoryTabs
+          activeCategory={activeCategory}
+          categories={categories}
+          categoriesWithPromo={categoriesWithPromo}
+          onSelect={selectCategory}
+          stickyTop={headerHeight}
+        />
       )}
 
       {isSearching ? (

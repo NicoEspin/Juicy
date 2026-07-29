@@ -91,6 +91,11 @@ export function ProductDetailOverlay({
                 {product.badge}
               </span>
             )}
+            {product.promoLabel && (
+              <span className="absolute right-3.5 top-3.5 rounded-lg bg-juicy-gold px-2.5 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.03em] text-juicy-black">
+                {product.promoLabel}
+              </span>
+            )}
           </div>
 
           <div className="px-4 pb-2 pt-5 sm:px-6">
@@ -137,7 +142,18 @@ export function ProductDetailOverlay({
                         type="radio"
                       />
                       <span className="text-sm font-bold">{variant.name}</span>
-                      <span className="text-[13px] font-semibold">{formatMoney(variant.price)}</span>
+                      {variant.promoPrice ? (
+                        <span className="flex flex-col items-center leading-tight">
+                          <span
+                            className={`text-[10px] line-through ${checked ? "text-white/70" : "text-juicy-gray"}`}
+                          >
+                            {formatMoney(variant.price)}
+                          </span>
+                          <span className="text-[13px] font-semibold">{formatMoney(variant.promoPrice)}</span>
+                        </span>
+                      ) : (
+                        <span className="text-[13px] font-semibold">{formatMoney(variant.price)}</span>
+                      )}
                     </label>
                   );
                 })}

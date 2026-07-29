@@ -1,11 +1,44 @@
+import bannerComboImage from "@/app/assets/banners/banner-combo.webp";
+import bannerEnvioImage from "@/app/assets/banners/banner-envio.webp";
 import { locationsContent } from "@/data/landingContent";
-import type { Branch, PaymentMethod } from "@/types/ordering";
+import type { Branch, PaymentMethod, Promotion } from "@/types/ordering";
 
 // Demo payment methods — the branch confirms the actual method by WhatsApp.
 export const PAYMENT_METHODS: PaymentMethod[] = [
   { id: "efectivo", name: "Efectivo", enabled: true, requiresCashAmount: true },
   { id: "transferencia", name: "Transferencia", enabled: true },
   { id: "coordinar", name: "A coordinar por WhatsApp", enabled: true },
+];
+
+// Demo promotions — replace with each branch's real, date-bound deals.
+// Mixes both slide kinds the banner supports: plain icon+text and full banner images.
+export const DEFAULT_PROMOTIONS: Promotion[] = [
+  {
+    kind: "text",
+    id: "promo-delivery",
+    title: "Envío gratis",
+    description: "En pedidos desde $20.000",
+    icon: "delivery",
+  },
+  {
+    kind: "text",
+    id: "promo-combo-day",
+    title: "Martes de combos",
+    description: "10% off en todos los combos",
+    icon: "discount",
+  },
+  {
+    kind: "image",
+    id: "promo-banner-envio",
+    image: bannerEnvioImage,
+    alt: "Envío gratis en pedidos desde $20.000",
+  },
+  {
+    kind: "image",
+    id: "promo-banner-combo",
+    image: bannerComboImage,
+    alt: "Martes de combos: 10% off en todos los combos",
+  },
 ];
 
 // Demo scheduling slots — replace with each branch's real availability.
@@ -50,6 +83,7 @@ export const BRANCHES: Branch[] = locationsContent.locations
     estimatedPickupTime: "15 a 20 min",
     schedulingEnabled: true,
     paymentMethods: PAYMENT_METHODS,
+    promotions: DEFAULT_PROMOTIONS,
   }));
 
 export function getBranchBySlug(slug: string): Branch | undefined {

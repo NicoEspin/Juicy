@@ -4,11 +4,16 @@ import type {
   FulfillmentType,
   Product,
   ProductFormState,
+  ProductVariant,
 } from "@/types/ordering";
+
+export function effectiveVariantPrice(variant: ProductVariant): number {
+  return variant.promoPrice ?? variant.price;
+}
 
 export function calculateUnitPrice(product: Product, form: ProductFormState): number {
   const variant = (product.variants || []).find((v) => v.id === form.variantId);
-  let total = variant ? variant.price : 0;
+  let total = variant ? effectiveVariantPrice(variant) : 0;
 
   const cheese = (product.cheeseOptions || []).find((c) => c.id === form.cheeseOptionId);
   if (cheese) total += cheese.priceModifier;

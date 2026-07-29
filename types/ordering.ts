@@ -1,3 +1,5 @@
+import type { StaticImageData } from "next/image";
+
 // ─── Branch (ordering-specific extension of LocationItem) ──────────────────
 
 export interface PaymentMethod {
@@ -6,6 +8,23 @@ export interface PaymentMethod {
   enabled: boolean;
   requiresCashAmount?: boolean;
 }
+
+export interface TextPromotion {
+  kind: "text";
+  id: string;
+  title: string;
+  description: string;
+  icon: "delivery" | "discount";
+}
+
+export interface ImagePromotion {
+  kind: "image";
+  id: string;
+  image: StaticImageData;
+  alt: string;
+}
+
+export type Promotion = TextPromotion | ImagePromotion;
 
 export interface Branch {
   id: string;
@@ -23,6 +42,7 @@ export interface Branch {
   estimatedPickupTime: string;
   schedulingEnabled: boolean;
   paymentMethods: PaymentMethod[];
+  promotions: Promotion[];
 }
 
 // ─── Catalog ─────────────────────────────────────────────────────────────
@@ -38,6 +58,8 @@ export interface ProductVariant {
   id: string;
   name: string;
   price: number;
+  /** Discounted price — when set, `price` renders struck through next to this one. */
+  promoPrice?: number;
   available: boolean;
 }
 
@@ -72,6 +94,8 @@ export interface Product {
   imageAlt: string;
   featured?: boolean;
   badge?: string | null;
+  /** Separate from `badge` so a bestseller ribbon and a deal tag can coexist. */
+  promoLabel?: string | null;
   available: boolean;
   variants: ProductVariant[];
   ingredients: ProductIngredient[];
