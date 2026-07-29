@@ -580,6 +580,60 @@ select {
   border-radius: 0.25rem;
 }
 
+/* ════════════════════════════════════════════════════════════
+   ORDERING FLOW — /sucursales/[slug]
+════════════════════════════════════════════════════════════ */
+
+.ordering-no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.ordering-no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes ordering-toast-in {
+  from {
+    opacity: 0;
+    transform: translate(16px, -6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes ordering-sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes ordering-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ordering-toast {
+  animation: ordering-toast-in 200ms ease;
+}
+
+.ordering-sheet {
+  animation: ordering-sheet-up 220ms ease;
+}
+
+.ordering-fade {
+  animation: ordering-fade-in 180ms ease;
+}
+
 .maplibregl-map {
   position: relative;
   overflow: hidden;

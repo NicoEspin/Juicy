@@ -144,6 +144,10 @@ export interface LocationItem {
   mapPoint: LocationPoint;
   coordinates?: GeoPoint;
   placeholderNote?: string;
+  /** Slug for the /sucursales/[slug] ordering flow. Absent when menuAvailable is false. */
+  slug?: string;
+  /** Whether this location has a live menu + ordering flow at /sucursales/[slug]. */
+  menuAvailable?: boolean;
 }
 
 export interface WaitlistContent {

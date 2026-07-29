@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -321,6 +322,29 @@ export function LocationsSectionClient({ content }: LocationsSectionClientProps)
               </dl>
 
               <div className="mt-4 flex flex-wrap gap-2.5">
+                {activeLocation.menuAvailable && activeLocation.slug && (
+                  <Link
+                    href={`/sucursales/${activeLocation.slug}`}
+                    className="group relative inline-flex items-center gap-2 overflow-hidden border-2 border-juicy-black bg-juicy-black px-4 py-2 text-[0.74rem] font-bold uppercase tracking-[0.08em] text-white transition-transform hover:-translate-y-0.5"
+                  >
+                    <span className="relative z-10">Ver menú y pedir</span>
+                    <svg
+                      className="relative z-10 h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M4 10h12M12 5l5 5-5 5"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </Link>
+                )}
+
                 <a
                   href={activeLocation.mapsHref}
                   target="_blank"

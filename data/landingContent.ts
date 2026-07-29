@@ -161,7 +161,7 @@ export const menuShowcaseContent: MenuShowcaseContent = {
 
   cta: {
     label: "Ver menú completo",
-    href: "/menu",
+    href: "/sucursales",
     whatsapp:
       "https://wa.me/543541000000?text=Hola!%20Quiero%20hacer%20un%20pedido%20%F0%9F%94%A5",
     helper: "También podés pedir por WhatsApp",
@@ -454,6 +454,8 @@ export const locationsContent: LocationsContent = {
       blurb: "Primer spot de Juicy. Alto flujo y salida rápida para takeaway.",
       mapPoint: { x: 45, y: 52 },
       coordinates: { lat: -31.41416082448952, lng: -64.50336767408304 },
+      slug: "carlos-paz-sarmiento",
+      menuAvailable: true,
     },
     {
       id: "vcp-oeste",
@@ -470,6 +472,8 @@ export const locationsContent: LocationsContent = {
       blurb: "Segunda spot para consumir en el local o takeaway.",
       mapPoint: { x: 62, y: 45 },
       coordinates: { lat: -31.40356697273261, lng: -64.47059608942664 },
+      slug: "carlos-paz-san-martin",
+      menuAvailable: true,
     },
     {
       id: "ba-launch",
@@ -484,6 +488,7 @@ export const locationsContent: LocationsContent = {
       blurb: "Bloque de captación temprana para abrir comunidad antes del lanzamiento.",
       mapPoint: { x: 76, y: 68 },
       placeholderNote: "Falta fecha y barrio de apertura.",
+      menuAvailable: false,
     },
   ],
   waitlist: {
@@ -508,7 +513,7 @@ export const footerContent: FooterContent = {
     { id: "nav-philosophy", label: "Filosofía", href: "#philosophy" },
     { id: "nav-menu", label: "Menú", href: "#menu-showcase" },
     { id: "nav-vibe", label: "The Vibe", href: "#the-vibe" },
-    { id: "nav-locations", label: "Sucursales", href: "#locations" },
+    { id: "nav-locations", label: "Sucursales", href: "/sucursales" },
     { id: "nav-reviews", label: "Reviews", href: "#reviews" },
   ],
   socialLinks: [
