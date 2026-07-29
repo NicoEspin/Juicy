@@ -31,13 +31,14 @@ export function MenuCatalog({ categories, onOpenDetail, products }: MenuCatalogP
             <div className="h-0.5 flex-1 bg-juicy-red/50" />
           </div>
 
-          <div className="grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="ordering-no-scrollbar -mx-4 flex snap-x snap-mandatory gap-3.5 overflow-x-auto px-4 py-1 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:py-0 lg:grid-cols-4">
             {section.products.map((product) => (
-              <ProductCard
+              <div
                 key={`${section.anchorId}-${product.id}`}
-                onOpenDetail={() => onOpenDetail(product)}
-                product={product}
-              />
+                className="w-[42vw] max-w-[172px] shrink-0 snap-start sm:w-auto sm:max-w-none sm:shrink"
+              >
+                <ProductCard onOpenDetail={() => onOpenDetail(product)} product={product} />
+              </div>
             ))}
           </div>
         </div>
